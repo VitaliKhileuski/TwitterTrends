@@ -8,5 +8,6 @@ namespace TwitterTrends
 {
     class Class7
     {
+        int privet;
     }
 }
