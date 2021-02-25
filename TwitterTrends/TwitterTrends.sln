@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterTrends", "TwitterTrends\TwitterTrends.csproj", "{38E9B224-7842-4EAB-950B-576A13E15733}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterTrends", "TwitterTrends\TwitterTrends.csproj", "{7038A63D-989C-418A-BE35-9871A11773F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{38E9B224-7842-4EAB-950B-576A13E15733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38E9B224-7842-4EAB-950B-576A13E15733}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38E9B224-7842-4EAB-950B-576A13E15733}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38E9B224-7842-4EAB-950B-576A13E15733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7038A63D-989C-418A-BE35-9871A11773F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7038A63D-989C-418A-BE35-9871A11773F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7038A63D-989C-418A-BE35-9871A11773F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7038A63D-989C-418A-BE35-9871A11773F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B08971E8-8C9C-4B2F-9397-65BF3A323635}
+		SolutionGuid = {E0DCEAA0-F695-4F9F-9A33-0EDEC4662E75}
 	EndGlobalSection
 EndGlobal
