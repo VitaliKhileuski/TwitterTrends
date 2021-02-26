@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitterTrends
+namespace TwitterTrends.ViewModels
 {
-    class Class1
+    class ViewModel
     {
     }
 }
