@@ -14,11 +14,11 @@ namespace TwitterTrends.Models
         public double X { get { return x; } set { x = value; } }
         public double Y { get { return y; } set { y = value; } }
 
-        Point()
+       public Point()
         {
 
         }
-        Point(double x, double y)
+       public Point(double x, double y)
         {
             X = x;
             Y = y;
