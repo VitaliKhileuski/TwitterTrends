@@ -13,14 +13,14 @@ namespace TwitterTrends.Services.Parsers
             Dictionary<string, double> sentiments = File.ReadAllLines(path)
                 .Where(row => row.Length > 0)
                 .Select(SentimentParser.ParseSentiment).ToDictionary(k => k.Key, v => v.Value);
-            double tempInt = temp["1"];
             return sentiments;
         }
 
         private static KeyValuePair<string, double> ParseSentiment(string row)
         {
             var columns = row.Split(',');
-            KeyValuePair<string, double> sentiment = new KeyValuePair<string, double>(columns[0], 5);  //FIX
+            columns[1] = columns[1].Replace('.', ',');
+            KeyValuePair<string, double> sentiment = new KeyValuePair<string, double>(columns[0], double.Parse(columns[1]));  //FIX
             return sentiment;
         }
     }
