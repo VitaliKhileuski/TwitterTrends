@@ -15,6 +15,7 @@ namespace TwitterTrends.Data
         private Dictionary<string, double> sentiments = SentimentParser.Parse(@"C:\Users\mashk\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Sentiments\sentiments.csv");
 
         public List<Tweet> Tweets { get { return tweets; } }
+        public Dictionary<string, double> Sentiments { get { return sentiments; } }
 
         private Database()
         {
