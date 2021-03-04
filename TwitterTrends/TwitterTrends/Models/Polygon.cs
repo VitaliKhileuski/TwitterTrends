@@ -11,5 +11,10 @@ namespace TwitterTrends.Models
         public List<Point> Points { get => points; set => points = value; }
 
         public Polygon() { }
+
+        public Polygon(Polygon polygon)
+        {
+            points =new List<Point>(polygon.Points);
+        }
     }
 }

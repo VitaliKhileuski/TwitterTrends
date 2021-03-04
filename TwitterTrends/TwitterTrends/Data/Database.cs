@@ -11,10 +11,23 @@ namespace TwitterTrends.Data
     {
         private static Database Instance = null;
 
-        private List<Tweet> tweets = TweetParser.Parse(@"C:\Users\mashk\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Tweets\cali_tweets2014.txt");
-        private Dictionary<string, double> sentiments = SentimentParser.Parse(@"C:\Users\mashk\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Sentiments\sentiments.csv");
-
-        public List<Tweet> Tweets { get { return tweets; } }
+        private List<Tweet> tweets = null;
+        private Dictionary<string, double> sentiments = SentimentParser.Parse(@"..\..\..\Data\Sentiments\sentiments.csv");
+        
+        public List<Tweet> Tweets
+        {
+            get 
+            {
+                if (tweets != null)
+                {
+                    return tweets;
+                }
+                else
+                {
+                    throw new NullReferenceException();
+                }
+            }
+        }
         public Dictionary<string, double> Sentiments { get { return sentiments; } }
 
         private Database()
@@ -29,6 +42,17 @@ namespace TwitterTrends.Data
                 Instance = new Database();
             }
             return Instance;
+        }
+        public void SetPathTweetFile(string filePath)
+        {
+            if (Instance != null)
+            {
+                tweets = TweetParser.Parse(filePath);
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
     }
 }

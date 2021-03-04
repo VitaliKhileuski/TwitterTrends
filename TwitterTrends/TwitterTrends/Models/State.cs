@@ -17,10 +17,19 @@ namespace TwitterTrends.Models
 
         internal List<Polygon> Polygons { get => polygons; set => polygons = value; }
 
+        public State()
+        {
+
+        }
         public State(string name, List<Polygon> polygons)
         {
             Name = name;
             this.polygons = polygons;
+        }
+        public State(State state)
+        {
+            name = state.Name;
+            polygons =new List<Polygon>(state.Polygons);
         }
     }
 }

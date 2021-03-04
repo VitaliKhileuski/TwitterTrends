@@ -11,5 +11,11 @@ namespace TwitterTrends.Models
 
         List<State> states = new List<State>();
         internal List<State> States { get => states; set => states = value; }
+
+        public Country(List<State> states)
+        {
+            States = states;
+            Name = "USA";
+        }
     }
 }
