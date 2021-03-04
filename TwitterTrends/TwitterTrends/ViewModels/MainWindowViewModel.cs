@@ -11,7 +11,7 @@ namespace TwitterTrends.ViewModels
     {
         public MainWindowViewModel()
         {
-            string temp = Database.GetInstance().Tweets[0].TweetMessage;
+          
         }
     }
 }

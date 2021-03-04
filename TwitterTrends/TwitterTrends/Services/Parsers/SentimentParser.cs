@@ -20,7 +20,7 @@ namespace TwitterTrends.Services.Parsers
         {
             var columns = row.Split(',');
             columns[1] = columns[1].Replace('.', ',');
-            KeyValuePair<string, double> sentiment = new KeyValuePair<string, double>(columns[0], double.Parse(columns[1]));  //FIX
+            KeyValuePair<string, double> sentiment = new KeyValuePair<string, double>(columns[0], double.Parse(columns[1]));
             return sentiment;
         }
     }

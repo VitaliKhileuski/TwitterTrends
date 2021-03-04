@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitterTrends.Models
 {
-   public class Point
+     public class Point
     {
         private double x;
         private double y;
