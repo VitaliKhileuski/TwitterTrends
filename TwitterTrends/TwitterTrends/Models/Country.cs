@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TwitterTrends.Models
 {
-    class Country
+    public class Country
     {
         private string name;
         public string Name { get => name; set => name = value; }
