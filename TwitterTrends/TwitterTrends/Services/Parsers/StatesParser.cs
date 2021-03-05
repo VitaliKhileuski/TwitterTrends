@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using TwitterTrends.Models;
-using TwitterTrends.States;
 using TwitterTrends.Models.Parsers;
 
 namespace TwitterTrends.Services.Parsers
@@ -12,7 +11,6 @@ namespace TwitterTrends.Services.Parsers
         public static Country Parse(string path)
         {
             List<State> states = new List<State>();
-            List<Polygon> polygons = new List<Polygon>();
             State state = new State();
             Polygon polygon = new Polygon();
 
@@ -20,8 +18,8 @@ namespace TwitterTrends.Services.Parsers
             string temp = string.Empty;
             string jsonString = File.ReadAllText(path);
 
-            //string jsonString = "[[[[]]]]";
-            jsonString =DeleteAnotherBrackets(DeleteUselessBrackets(jsonString));
+           
+            jsonString = DeleteAnotherBrackets(DeleteUselessBrackets(jsonString));
 
             for (int i = 0; i < jsonString.Length; i++)
             {
