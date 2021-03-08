@@ -19,7 +19,16 @@ namespace TwitterTrends.Models.Parsers
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    tweets.Add(TweetParse(line));
+                    if (line != String.Empty)
+                    {
+                        if (line[0] != '[' || (line[1] <= 49 || line[1] >= 57))
+                        {
+                            continue;
+                        }
+                        tweets.Add(TweetParse(line));
+                    }
+
+
                 }
             }
 
@@ -62,7 +71,7 @@ namespace TwitterTrends.Models.Parsers
             double[] Coordinates = new double[2];
             string temp = "";
             int count = 0;
-            Regex coordinates = new Regex(@"\[-?\d*\.\d*\, -?\d*\.\d*\]");
+            Regex coordinates = new Regex(@"\[-?\d*\.?\d*\, -?\d*\.?\d*\]");
             string s = coordinates.Match(line).Value + "_";
             foreach (var symbol in s)
             {
@@ -95,8 +104,41 @@ namespace TwitterTrends.Models.Parsers
             string date = time.Match(line).Value;
             int index = line.IndexOf(date) + date.Length;
             tweetMessage = line.Substring(index, line.Length - index);
-
+            tweetMessage = RemoveUsellesWords(tweetMessage);
+         
             return tweetMessage;
+        }
+        private static string RemoveUsellesWords(string line)
+        {
+            Regex link = new Regex(@"http://\S*");
+            Regex hashtag = new Regex(@"#\S*");
+            Regex referenceToPerson = new Regex(@"@\S*");
+            line = link.Replace(line, String.Empty);
+            line = hashtag.Replace(line, String.Empty);
+            line = referenceToPerson.Replace(line, String.Empty);
+
+            int wordLength = 1;
+            for(int i=0; i<line.Length; i++)
+            {
+                if (line[i] == '@' || line[i]=='#')
+                {
+                    for(int j = i; j<line.Length; j++)
+                    {
+                        if(line[j]==' ')
+                        {
+                            line.Remove(i, wordLength);
+                            wordLength = 1;
+                        }
+                        else
+                        {
+                            wordLength++;
+                        }
+                    }
+                }
+            }
+
+
+            return line;
         }
     }
 }
