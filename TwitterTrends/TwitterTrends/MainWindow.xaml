@@ -5,15 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TwitterTrends"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DockPanel>
+        Title="Twitter trends" Height="720" Width="1280">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding ElementName=LeftExtraMenu, Path=Width}"></ColumnDefinition>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"></RowDefinition>
+            <RowDefinition Height="639*"></RowDefinition>
+            <RowDefinition Height="46*"/>
+        </Grid.RowDefinitions>
+        <DockPanel x:Name="TopMainMenuDockPanel"
+                   Grid.Row="0" 
+                   Grid.ColumnSpan ="3">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="file">
+                <MenuItem Header="File">
                     <MenuItem Header="Upload File" Command="{Binding OpenTweetsFile}">
                     </MenuItem>
+                    <MenuItem Header="Exit" Command="{Binding ExitProgramm}">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="About">
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <Grid x:Name="LeftExtraMenu"
+              Grid.Row="1"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Stretch"
+              Width="26"
+              Background="LightGreen"
+              >
+            <DockPanel 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                >
+                <ToggleButton 
+                    x:Name="LeftExtraMenuButton"
+                    Width="26"
+                    Height="20"
+                    Background="Aqua">
+                    <ToggleButton.Triggers>
+                        <EventTrigger 
+                                RoutedEvent="ToggleButton.Checked">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                                Storyboard.TargetName="LeftExtraMenu"
+                                                Storyboard.TargetProperty="Width"
+                                                From="26"
+                                                To="230"
+                                                Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                        <EventTrigger 
+                                RoutedEvent="ToggleButton.Unchecked">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                                Storyboard.TargetName="LeftExtraMenu"
+                                                Storyboard.TargetProperty="Width"
+                                                From="230"
+                                                To="26"
+                                                Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
+            </DockPanel>
+        </Grid>
+        <Grid x:Name="BottomTimePanelGrid"
+              Grid.Row="2"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Center"
+              >
+            <DockPanel x:Name="BottomDockPanel">
+                <Button 
+                    x:Name="TimeButton"
+                    Width="100"
+                    DockPanel.Dock="Left"
+                    Margin="50,5"
+                    Content="All day"
+                    >
+                </Button>
+                <DockPanel x:Name="BottomTimeDockPanel"
+                           >
+                    <TextBlock 
+                       x:Name="EarliestTimeTextBlock"
+                       Text= "00:00"
+                       Width="30"
+                       Margin="59,13,0,13"
+                />
+                    <Slider x:Name="TimeSlider"
+                        DockPanel.Dock="Left"
+                        Width="600"
+                        Height="20"
+                        Margin="10"
+                />
+                    <TextBlock x:Name="LatestTimeTextBlock"
+                            Text="xx:xx"
+                            DockPanel.Dock="Right"
+                            Width="30"
+                            Margin="0,13,0,13"
+                            HorizontalAlignment="Left"
+                                >
+                    </TextBlock>
+                </DockPanel>
+                
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>
