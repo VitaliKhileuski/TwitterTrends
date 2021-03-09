@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TwitterTrends"
         mc:Ignorable="d"
         Title="Twitter trends" Height="720" Width="1280">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding ElementName=LeftExtraMenu, Path=Width}"></ColumnDefinition>
             <ColumnDefinition Width="1*"/>
@@ -36,14 +36,16 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Stretch"
               Width="26"
-              Background="LightGreen"
+              Background="Transparent"
+              Panel.ZIndex="1"
               >
-            <DockPanel 
-                VerticalAlignment="Top"
+            <DockPanel
+                VerticalAlignment="Stretch"
                 HorizontalAlignment="Left"
                 >
                 <ToggleButton 
                     x:Name="LeftExtraMenuButton"
+                    VerticalAlignment="Top"
                     Width="26"
                     Height="20"
                     Background="Aqua">
@@ -58,7 +60,14 @@
                                                 Storyboard.TargetProperty="Width"
                                                 From="26"
                                                 To="230"
-                                                Duration="0:0:0.1"/>
+                                                Duration="0:0:0.2"/>
+                                        <ColorAnimation
+                                                To="White"
+                                                Storyboard.TargetName="LeftExtraMenu"
+                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                                Duration="0:0:0.3"
+                                                         >
+                                        </ColorAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger.Actions>
@@ -73,7 +82,14 @@
                                                 Storyboard.TargetProperty="Width"
                                                 From="230"
                                                 To="26"
-                                                Duration="0:0:0.1"/>
+                                                Duration="0:0:0.2"/>
+                                        <ColorAnimation
+                                                To="Transparent"
+                                                Storyboard.TargetName="LeftExtraMenu"
+                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                                Duration="0:0:0.3"
+                                                         >
+                                        </ColorAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger.Actions>
@@ -122,6 +138,17 @@
                 </DockPanel>
                 
             </DockPanel>
+        </Grid>
+        <Grid x:Name="CenterMapPlaceGrid"
+              Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              >
+            <Image Source="C:\\Users\\User\\Downloads\\wallpaper.png"
+                   Stretch="Fill"
+                >
+            </Image>
+            
         </Grid>
     </Grid>
 </Window>
