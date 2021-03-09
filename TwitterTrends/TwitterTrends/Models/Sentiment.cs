@@ -7,11 +7,21 @@ namespace TwitterTrends.Models
     public class Sentiment
     {
         private string text;
-        private int numberOfWords;
         private double value;
 
         public string Text { get { return text; } set { text = value; } }
-        public int NumberOfWords { get { return numberOfWords; } set { numberOfWords = value; } }
+        public int NumberOfWords 
+        { 
+            get 
+            {
+                int numOfW = 1;
+                foreach (char c in text)
+                {
+                    if (c == ' ') numOfW++;
+                }
+                return numOfW;
+            } 
+        }
         private double Value { get { return value;  } set { this.value = value; } }
 
         public Sentiment()

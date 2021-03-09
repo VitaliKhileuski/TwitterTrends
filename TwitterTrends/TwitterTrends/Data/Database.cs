@@ -12,7 +12,7 @@ namespace TwitterTrends.Data
         private static Database Instance = null;
 
         private List<Tweet> tweets = null;
-        private Dictionary<string, double> sentiments = SentimentParser.Parse(@"..\..\..\Data\Sentiments\sentiments.csv");
+        private Dictionary<char, List<Sentiment>> sentiments = SentimentParser.Parse(@"..\..\..\Data\Sentiments\sentiments.csv");
         
         public List<Tweet> Tweets
         {
@@ -28,7 +28,7 @@ namespace TwitterTrends.Data
                 }
             }
         }
-        public Dictionary<string, double> Sentiments { get { return sentiments; } }
+        public Dictionary<char, List<Sentiment>> Sentiments { get { return sentiments; } }
 
         private Database()
         {
