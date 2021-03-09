@@ -34,17 +34,14 @@
         <Grid x:Name="LeftExtraMenu"
               Grid.Row="1"
               HorizontalAlignment="Left"
-              VerticalAlignment="Stretch"
               Width="26"
               Background="Transparent"
               Panel.ZIndex="1"
               >
-            <DockPanel
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Left"
-                >
+            <DockPanel HorizontalAlignment="Left">
                 <ToggleButton 
                     x:Name="LeftExtraMenuButton"
+                    DockPanel.Dock="Top"
                     VerticalAlignment="Top"
                     Width="26"
                     Height="20"
@@ -114,6 +111,7 @@
                     >
                 </Button>
                 <DockPanel x:Name="BottomTimeDockPanel"
+                           VerticalAlignment="Center"
                            >
                     <TextBlock 
                        x:Name="EarliestTimeTextBlock"
@@ -143,12 +141,25 @@
               Grid.Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="2"
+              Background="DarkCyan"
               >
-            <Image Source="C:\\Users\\User\\Downloads\\wallpaper.png"
-                   Stretch="Fill"
-                >
-            </Image>
-            
+           
+        </Grid>
+        <Grid x:Name="RightStatisticsInfoGrid"
+              Grid.Row="1"
+              Grid.RowSpan="2"
+              Grid.Column="2"
+              >
+            <DockPanel VerticalAlignment="Top">
+                <Image Height="200"
+                       DockPanel.Dock="Top">
+
+                </Image>
+                <TextBlock Text="Statistics:"
+                           HorizontalAlignment="Center">
+                    
+                </TextBlock>
+            </DockPanel>
         </Grid>
     </Grid>
 </Window>
