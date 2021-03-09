@@ -111,5 +111,58 @@ namespace TwitterTrends.Services.Parsers
 
             return jsonstring;
         }
+
+
+        private static bool IsInside(Polygon polygon,Tweet tweet)
+        {
+            bool flag = false;
+            for (int i = 0, j = polygon.Points.Count - 1; i < polygon.Points.Count; j = i++)
+            {
+
+                if ((((polygon.Points[i].Y <= tweet.PointOnMap.Y) && (tweet.PointOnMap.Y < polygon.Points[j].Y)) || ((polygon.Points[j].Y <= tweet.PointOnMap.Y)
+                    && (tweet.PointOnMap.Y < polygon.Points[i].Y))) &&
+                    (((polygon.Points[j].Y - polygon.Points[i].Y) != 0) &&
+                    (tweet.PointOnMap.X > ((polygon.Points[j].X - polygon.Points[i].X)
+                    * (tweet.PointOnMap.Y - polygon.Points[i].Y) / (polygon.Points[j].Y - polygon.Points[i].Y) + polygon.Points[i].X))))
+                {
+                    flag = !flag;
+                }
+            }
+            return flag;
+        }
+        public static Country GroupTweetsByStates(List<Tweet>tweets,string path)
+        {
+            Country country = Parse(path);
+            foreach(var tweet in tweets)
+            {
+                foreach(var state in country.States)
+                {
+                    foreach(var polygon in state.Polygons)
+                    {
+                        if (IsInside(polygon, tweet)) { state.Tweets.Add(tweet); }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+            EstimateStatesMood(country);
+            return country;
+        }
+
+        private static void EstimateStatesMood(Country country)
+        {
+            
+            foreach(var state in country.States)
+            {
+               
+                foreach(var tweet in state.Tweets)
+                {
+                    state.TotalWeight += tweet.MoodWeight;
+                }
+                state.TotalWeight = state.TotalWeight / state.Tweets.Count;
+            }
+        }
     }
 }

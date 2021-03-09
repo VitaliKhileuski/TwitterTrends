@@ -16,7 +16,10 @@ namespace TwitterTrends.Models
         List<Polygon> polygons = new List<Polygon>();
 
         internal List<Polygon> Polygons { get => polygons; set => polygons = value; }
-
+        private List<Tweet> tweets = new List<Tweet>();
+        public List<Tweet> Tweets { get => tweets; set => tweets = value; }
+        private double totalWeight;
+        public double TotalWeight { get => totalWeight; set => totalWeight = value; }
         public State()
         {
 
@@ -25,11 +28,15 @@ namespace TwitterTrends.Models
         {
             Name = name;
             this.polygons = polygons;
+            TotalWeight = 0;
+            Tweets = new List<Tweet>();
         }
         public State(State state)
         {
             name = state.Name;
             polygons =new List<Polygon>(state.Polygons);
+            totalWeight = state.TotalWeight;
+            tweets = new List<Tweet>(state.Tweets);
         }
     }
 }
