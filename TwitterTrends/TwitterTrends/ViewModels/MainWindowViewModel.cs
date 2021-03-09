@@ -14,7 +14,7 @@ namespace TwitterTrends.ViewModels
     {
         public MainWindowViewModel()
         {
-            StatesParser.Parse(@"C:\Users\Vitali Khileuski\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\States\states.json");
+            //StatesParser.Parse(@"C:\Users\Vitali Khileuski\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\States\states.json");
         }
 
     }
