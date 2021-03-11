@@ -20,7 +20,7 @@ namespace TwitterTrends.ViewModels
 
 
             //Database.GetInstance().SetPathTweetFile(@"C:\Users\Vitali Khileuski\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Tweets\weekend_tweets2014.txt");
-            //List<Tweet> tweets = TweetParser.Parse(@"C:\Users\Vitali Khileuski\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Tweets\weekend_tweets2014.txt");
+            List<Tweet> tweets = TweetParser.Parse(@"C:\Users\mashk\source\repos\TwitterTrends\TwitterTrends\TwitterTrends\Data\Tweets\weekend_tweets2014.txt");
             TweetParser.GetWeight("yellow spot fungus");
             var second = DateTime.Now;
             double lol = (second - first).TotalSeconds;

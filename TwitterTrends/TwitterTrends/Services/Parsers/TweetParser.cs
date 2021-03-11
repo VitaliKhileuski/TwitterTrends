@@ -147,7 +147,7 @@ namespace TwitterTrends.Models.Parsers
         public static double GetWeight(string message)
         {
             int maxNumberOfWordsInSentiment = 0;
-
+            message = message.Trim();
             string firstWordInPrase = String.Empty;
             List<Sentiment> sentimentsByFirstWord = new List<Sentiment>();
             char[] delimiterChars = {'.', ',', '?', ':' , '!' , ';' };
@@ -155,30 +155,36 @@ namespace TwitterTrends.Models.Parsers
             double fullWeigth = 0;
             foreach(var phrase in phrases)
             {
-                string copyOfPhrase = phrase;
+                string copyOfPhrase = phrase.Trim();
                 if (phrase == ""){continue;}
                 while (copyOfPhrase.Length != 0) //FIX
                 {
                     firstWordInPrase = GetFirstWordInPhrase(copyOfPhrase);
-                    foreach (var sentiment in sentiments[firstWordInPrase[0]])
+                    if (sentiments.ContainsKey(firstWordInPrase[0]))
                     {
-                        if ((sentiment.Text + " ").StartsWith(firstWordInPrase + " "))
+                        var first = DateTime.Now;
+                        foreach (var sentiment in sentiments[firstWordInPrase[0]])
                         {
-                            sentimentsByFirstWord.Add(sentiment);
-
-                            if (sentiment.NumberOfWords > maxNumberOfWordsInSentiment)
+                            if ((sentiment.Text + " ").StartsWith(firstWordInPrase + " "))
                             {
-                                maxNumberOfWordsInSentiment = sentiment.NumberOfWords;
+                                sentimentsByFirstWord.Add(sentiment);
+
+                                if (sentiment.NumberOfWords > maxNumberOfWordsInSentiment)
+                                {
+                                    maxNumberOfWordsInSentiment = sentiment.NumberOfWords;
+                                }
                             }
                         }
+                        var second = DateTime.Now;
+                        double lol = (second - first).TotalSeconds;
                     }
                     if(sentimentsByFirstWord.Count == 0)
                     {
-                        copyOfPhrase = copyOfPhrase.Remove(0, firstWordInPrase.Length);
+                        copyOfPhrase = copyOfPhrase.Remove(0, firstWordInPrase.Length).Trim();
                         continue;
                     }
                     string temp = CutPhrase(copyOfPhrase, maxNumberOfWordsInSentiment);
-                    fullWeigth += GetWeightOfPartOfPhrase(ref temp, sentimentsByFirstWord);
+                    fullWeigth += GetWeightOfPartOfPhrase(ref temp, sentimentsByFirstWord, maxNumberOfWordsInSentiment);
                     copyOfPhrase = copyOfPhrase.Remove(0, temp.Length).Trim();
                     sentimentsByFirstWord.Clear();
                 }
@@ -222,10 +228,21 @@ namespace TwitterTrends.Models.Parsers
             }
             return cuttedPhrase;
         }
-        static private double GetWeightOfPartOfPhrase(ref string part, List<Sentiment> sentiments)
+        static private double GetWeightOfPartOfPhrase(ref string part, List<Sentiment> sentiments, int num)
         {
             double weight = 0;
-
+            while (true)
+            {
+                foreach(Sentiment s in sentiments)
+                {
+                    if(s.NumberOfWords == num && part.ToLower().Trim() == s.Text)
+                    {
+                        return s.Value;
+                    }
+                }
+                if (part.LastIndexOf(' ') != -1) { part = part.Substring(0, part.LastIndexOf(' ')); num--; }
+                else break;
+            }
             return weight;
         }
     }
