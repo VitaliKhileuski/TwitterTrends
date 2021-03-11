@@ -22,7 +22,7 @@ namespace TwitterTrends.Models
                 return numOfW;
             } 
         }
-        private double Value { get { return value;  } set { this.value = value; } }
+        public double Value { get { return value;  } set { this.value = value; } }
 
         public Sentiment()
         {
