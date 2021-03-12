@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         xmlns:local="clr-namespace:TwitterTrends"
         mc:Ignorable="d"
         Title="Twitter trends" Height="720" Width="1280">
@@ -141,9 +142,8 @@
               Grid.Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="2"
-              Background="DarkCyan"
               >
-           
+            <gmaps:GMapControl x:Name="gmap" Loaded="Loaded_gmap"/>
         </Grid>
         <Grid x:Name="RightStatisticsInfoGrid"
               Grid.Row="1"
