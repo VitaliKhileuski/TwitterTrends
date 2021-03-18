@@ -20,6 +20,7 @@ namespace TwitterTrends.Models
         public List<Tweet> Tweets { get => tweets; set => tweets = value; }
         private double totalWeight;
         public double TotalWeight { get => totalWeight; set => totalWeight = value; }
+        public bool isMoodDefined = false;
         public State()
         {
 

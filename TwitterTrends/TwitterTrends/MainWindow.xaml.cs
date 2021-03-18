@@ -71,11 +71,10 @@ namespace TwitterTrends
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
 
             Country country;
-            country = StatesParser.Parse("E:\\states.json");
+            country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
 
             foreach (var state in country.States)
             {
-
                 foreach (var polygon in state.Polygons)
                 {
                     List<PointLatLng> pointlatlang = new List<PointLatLng>();
@@ -86,7 +85,7 @@ namespace TwitterTrends
                     }
                     pol.Points = pointlatlang;
                     gmap.RegenerateShape(pol);
-                    (pol.Shape as Path).Fill = Brushes.Blue;
+                    (pol.Shape as Path).Fill = GetColorByMood(state);
                     (pol.Shape as Path).Stroke = Brushes.Blue;
                     (pol.Shape as Path).StrokeThickness = 1.5;
                     (pol.Shape as Path).Effect = null;
@@ -125,6 +124,28 @@ namespace TwitterTrends
 
            
 
+        }
+
+        private SolidColorBrush GetColorByMood(State currentState)
+        {
+            double temp = currentState.TotalWeight;
+            if (currentState.isMoodDefined)
+            {
+                if (temp == 0) return Brushes.White;
+                else if(temp > 0)
+                {
+                    if (temp <= 0.5) return Brushes.LightBlue;
+                    else if (temp <= 0.75) return Brushes.Blue;
+                    else return Brushes.DarkBlue;
+                }
+                else
+                {
+                    if (temp >= -0.5) return Brushes.Yellow;
+                    else if (temp >= -0.75) return Brushes.Orange;
+                    else return Brushes.Red;
+                }
+            }
+            return Brushes.Gray;
         }
     }
 }
