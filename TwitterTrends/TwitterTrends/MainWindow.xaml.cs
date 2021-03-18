@@ -71,7 +71,7 @@ namespace TwitterTrends
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
 
             Country country;
-            country = StatesParser.Parse("E:\\states.json");
+            country = StatesParser.Parse("../../../Data/States/states.json");
 
             foreach (var state in country.States)
             {
