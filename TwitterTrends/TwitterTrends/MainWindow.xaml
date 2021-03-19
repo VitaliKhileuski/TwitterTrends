@@ -15,7 +15,7 @@
         xmlns:local="clr-namespace:TwitterTrends"
         mc:Ignorable="d"
         Title="Twitter trends" Height="720" Width="1280">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding ElementName=LeftExtraMenu, Path=Width}"></ColumnDefinition>
             <ColumnDefinition Width="1*"/>
@@ -59,7 +59,8 @@
                     >
                     <ToggleButton.Triggers>
                         <EventTrigger 
-                                RoutedEvent="ToggleButton.Checked">
+                                RoutedEvent="ToggleButton.Checked"
+                                >
                             <EventTrigger.Actions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -73,7 +74,7 @@
                                                 To="White"
                                                 Storyboard.TargetName="LeftExtraMenu"
                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                                                Duration="0:0:0.3"
+                                                Duration="0:0:0.4"
                                                          >
                                         </ColorAnimation>
                                     </Storyboard>
@@ -95,7 +96,7 @@
                                                 To="Transparent"
                                                 Storyboard.TargetName="LeftExtraMenu"
                                                 Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                                                Duration="0:0:0.3"
+                                                Duration="0:0:0.4"
                                                          >
                                         </ColorAnimation>
                                     </Storyboard>
@@ -108,11 +109,30 @@
                           DockPanel.Dock="Top"
                           HorizontalAlignment="Left"
                           Width="230"
+                          Visibility="Visible"
                           >
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookOpen"></materialDesign:PackIcon>
+                            <TextBlock Text="Choose file to open" Margin="15 0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="UnidentifiedFlyingObject"></materialDesign:PackIcon>
+                            <TextBlock Text="Я - летающая тарелка" Margin="20 0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageOpen"></materialDesign:PackIcon>
-                            <TextBlock Text="Open it now"></TextBlock>
+                            <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CloseBold"></materialDesign:PackIcon>
+                            <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem></ListViewItem>
