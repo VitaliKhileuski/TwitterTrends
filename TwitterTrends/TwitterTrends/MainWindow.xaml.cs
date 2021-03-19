@@ -22,6 +22,8 @@ using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
 using Brushes = System.Windows.Media.Brushes;
+using Point = TwitterTrends.Models.Point;
+using Polygon = TwitterTrends.Models.Polygon;
 
 namespace TwitterTrends
 {
@@ -70,8 +72,9 @@ namespace TwitterTrends
             GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
 
+
             Country country;
-            country = StatesParser.Parse("E:\\states.json");
+            country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
 
             foreach (var state in country.States)
             {
@@ -94,37 +97,60 @@ namespace TwitterTrends
                 }
 
             }
+            DrawMarkers("snow_tweets2014.txt");
 
+         
+            #region Test
+            //   List<Tweet> tweets = TweetParser.Parse(@"..\..\..\Data\Tweets\cali_tweets2014.txt");
 
+            //Country country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
+            //   foreach(var state in country.States)
+            //   {
+            //       foreach(var pol in state.Polygons)
+            //       {
+            //           foreach(var point in pol.Points)
+            //           {
+            //               double bufer;
+            //               bufer = point.X;
+            //               point.X = point.Y;
+            //               point.Y = bufer;
+            //           }
+            //       }
+            //   }
+            //   Polygon polygon = country.States[0].Polygons[0];
+            //   int count = 0;
+            //   foreach(var tweet in tweets)
+            //   {
+            //       if (StatesParser.IsInside(polygon, tweet)) { count++; } 
+            //   }
+            #endregion
 
-            //          List<PointLatLng> pointlatlang= new List<PointLatLng>()
-            //          {
-
-            //new PointLatLng( 39.804456,-75.414089),
-            //          new PointLatLng(39.683964,-75.507197),
-            //           new PointLatLng(39.61824,-75.611259),
-            //            new PointLatLng(39.459409,-75.589352),
-            //             new PointLatLng(39.311532,-75.441474),
-            //               new PointLatLng(39.065069,-75.403136),
-            //          new PointLatLng(38.807653,-75.189535),
-            //           new PointLatLng(38.796699,-75.09095),
-            //            new PointLatLng(38.451652,-75.047134),
-            //             new PointLatLng(38.462606,-75.693413),
-            //               new PointLatLng(39.722302,-75.786521),
-            //          new PointLatLng(39.831841,-75.616736),
-            //             new PointLatLng(39.804456,-75.414089)
-            //      };
-
-            //          GMapPolygon polygon = new GMapPolygon(pointlatlang);
-            //          gmap.RegenerateShape(polygon);
-            //          (polygon.Shape as Path).Fill = Brushes.Red;
-            //         (polygon.Shape as Path).Stroke =Brushes.Blue;
-            //          (polygon.Shape as Path).StrokeThickness = 1.5;
-            //          (polygon.Shape as Path).Effect = null;
-            //          gmap.Markers.Add(polygon);
-
-           
 
         }
+
+
+
+
+
+        private void DrawMarkers(string fileName)
+        {
+            List<Tweet> tweets = TweetParser.Parse(@"..\..\..\Data\Tweets\"+fileName);
+            foreach (var tweet in tweets)
+            {
+                GMapMarker marker = new GMapMarker(new PointLatLng(tweet.PointOnMap.X, tweet.PointOnMap.Y));
+                marker.Shape = new Ellipse
+                {
+
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1.5,
+                    Height = 5,
+                    Width = 5
+                };
+             
+                gmap.Markers.Add(marker);
+            }
+        }
+        
     }
 }

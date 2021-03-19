@@ -113,7 +113,7 @@ namespace TwitterTrends.Services.Parsers
         }
 
 
-        private static bool IsInside(Polygon polygon,Tweet tweet)
+        public  static bool IsInside(Polygon polygon,Tweet tweet)
         {
             bool flag = false;
             for (int i = 0, j = polygon.Points.Count - 1; i < polygon.Points.Count; j = i++)
@@ -132,8 +132,21 @@ namespace TwitterTrends.Services.Parsers
         }
         public static Country GroupTweetsByStates(List<Tweet>tweets,string path)
         {
-            Country country = Parse(path);
-            foreach(var tweet in tweets)
+           Country country =StatesParser.Parse(path);
+            foreach (var state in country.States)
+            {
+                foreach (var pol in state.Polygons)
+                {
+                    foreach (var point in pol.Points)
+                    {
+                        double bufer;
+                        bufer = point.X;
+                        point.X = point.Y;
+                        point.Y = bufer;
+                    }
+                }
+            }
+            foreach (var tweet in tweets)
             {
                 foreach(var state in country.States)
                 {
