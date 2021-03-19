@@ -11,8 +11,9 @@ namespace TwitterTrends.Data
     {
         private static Database Instance = null;
 
-        private List<Tweet> tweets = null;
-        private Dictionary<char, List<Sentiment>> sentiments = SentimentParser.Parse(@"..\..\..\Data\Sentiments\sentiments.csv");
+        private List<Tweet> tweets;
+        private Dictionary<char, List<Sentiment>> sentiments;
+        private Country country;
         
         public List<Tweet> Tweets
         {
@@ -30,9 +31,11 @@ namespace TwitterTrends.Data
         }
         public Dictionary<char, List<Sentiment>> Sentiments { get { return sentiments; } }
 
+        public Country Country { get { return country; } }
+
         private Database()
         {
-
+            sentiments = SentimentParser.Parse(@"..\..\..\Data\Sentiments\sentiments.csv");
         }
 
         public static Database GetInstance()
@@ -48,6 +51,7 @@ namespace TwitterTrends.Data
             if (Instance != null)
             {
                 tweets = TweetParser.Parse(filePath);
+                country = StatesParser.GroupTweetsByStates(tweets, @"..\..\..\Data\States\states.json");
             }
             else
             {

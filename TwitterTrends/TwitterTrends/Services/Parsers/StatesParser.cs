@@ -133,13 +133,26 @@ namespace TwitterTrends.Services.Parsers
         public static Country GroupTweetsByStates(List<Tweet>tweets,string path)
         {
             Country country = Parse(path);
+            foreach(var state in country.States)
+            {
+                foreach(var pol in state.Polygons)
+                {
+                    foreach(var point in pol.Points)
+                    {
+                        double buffer = point.X;
+                        point.X = point.Y;
+                        point.Y = buffer;
+                    }
+                }
+            }
             foreach(var tweet in tweets)
             {
                 foreach(var state in country.States)
                 {
                     foreach(var polygon in state.Polygons)
                     {
-                        if (IsInside(polygon, tweet)) { state.Tweets.Add(tweet); }
+                        if (IsInside(polygon, tweet)) 
+                        { state.TotalWeight += tweet.MoodWeight; state.isMoodDefined = true; }
                         else
                         {
                             continue;
@@ -147,7 +160,7 @@ namespace TwitterTrends.Services.Parsers
                     }
                 }
             }
-            EstimateStatesMood(country);
+            //EstimateStatesMood(country);
             return country;
         }
 

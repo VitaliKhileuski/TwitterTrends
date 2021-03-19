@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TwitterTrends.Data;
 using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
@@ -42,7 +43,7 @@ namespace TwitterTrends
             //загрузка вьюмодел для кнопок меню
             MainWindowViewModel viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
-
+            Database.GetInstance().SetPathTweetFile(@"..\..\..\Data\Tweets\football_tweets2014.txt");
             
         }
 
@@ -70,10 +71,10 @@ namespace TwitterTrends
             GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
 
-            Country country;
-            country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
+            //Country country;
+            //country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
 
-            foreach (var state in country.States)
+            foreach (var state in Database.GetInstance().Country.States)
             {
                 foreach (var polygon in state.Polygons)
                 {
@@ -81,7 +82,7 @@ namespace TwitterTrends
                     GMapPolygon pol = new GMapPolygon(pointlatlang);
                     foreach (var point in polygon.Points)
                     {
-                        pointlatlang.Add(new PointLatLng(point.Y, point.X));
+                        pointlatlang.Add(new PointLatLng(point.X, point.Y));
                     }
                     pol.Points = pointlatlang;
                     gmap.RegenerateShape(pol);
