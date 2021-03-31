@@ -23,12 +23,11 @@
             <ColumnDefinition Width="250"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"></RowDefinition>
-            <RowDefinition Height="639*"></RowDefinition>
+            <RowDefinition Height="659*"></RowDefinition>
             <RowDefinition Height="46*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="LeftExtraMenu"
-              Grid.Row="1"
+              Grid.Row="0"
               Width="35"
               Background="Transparent"
               Panel.ZIndex="1"
@@ -143,31 +142,33 @@
             </DockPanel>
         </Grid>
         <Grid x:Name="BottomTimePanelGrid"
-              Grid.Row="2"
+              Grid.Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="2"
               HorizontalAlignment="Center"
               >
-            <TextBlock x:Name="BottomCensureText" 
-                       Text="Project was created by 4 glorious guys: Me and 3 friends of mine ." 
-                       FontSize="20"/>
+            <ProgressBar x:Name="LoadingProgressBar"
+                         Width="800"
+                         Height="30"
+                         Margin="10"/>
         </Grid>
         <Grid x:Name="CenterMapPlaceGrid"
-              Grid.Row="1"
+              Grid.Row="0"
               Grid.Column="0"
               Grid.ColumnSpan="2"
               >
             <gmaps:GMapControl MouseDoubleClick="MouseDoubleClick" x:Name="gmap" Loaded="Loaded_gmap"/>
         </Grid>
         <Grid x:Name="RightStatisticsInfoGrid"
-              Grid.Row="1"
+              Grid.Row="0"
               Grid.RowSpan="2"
               Grid.Column="2"
               >
             <DockPanel VerticalAlignment="Top">
                 <Image x:Name="RightLogoImage"
                        gif:ImageBehavior.AnimatedSource="Data/Pictures/twittergif.gif"
-                       gif:ImageBehavior.RepeatBehavior="6"
+                       gif:ImageBehavior.AutoStart="False"
+                       
                        Height="auto"
                        DockPanel.Dock="Top">
 
