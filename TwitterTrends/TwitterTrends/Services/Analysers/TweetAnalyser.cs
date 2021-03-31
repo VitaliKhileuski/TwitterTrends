@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TwitterTrends.Models;
+using TwitterTrends.Services.Extra;
 
 namespace TwitterTrends.Services.Analysers
 {
@@ -32,9 +33,9 @@ namespace TwitterTrends.Services.Analysers
                             {
                                 sentimentsByFirstWord.Add(sentiment);
 
-                                if (sentiment.NumberOfWords > maxNumberOfWordsInSentiment)
+                                if (Extra.ExtraFuncs.GetNumberOfWords(sentiment.Text) > maxNumberOfWordsInSentiment)
                                 {
-                                    maxNumberOfWordsInSentiment = sentiment.NumberOfWords;
+                                    maxNumberOfWordsInSentiment = Extra.ExtraFuncs.GetNumberOfWords(sentiment.Text);
                                 }
                             }
                         }
@@ -92,7 +93,7 @@ namespace TwitterTrends.Services.Analysers
             {
                 foreach (Sentiment s in sentiments)
                 {
-                    if (s.NumberOfWords == num && part.ToLower().Trim() == s.Text)
+                    if (Extra.ExtraFuncs.GetNumberOfWords(s.Text) == num && part.ToLower().Trim() == s.Text)
                     {
                         return s.Value;
                     }

@@ -51,15 +51,5 @@ namespace TwitterTrends.Services.Parsers
             Sentiment sentiment = new Sentiment(columns[0], double.Parse(columns[1]));
             return sentiment;
         }
-
-        private static int GetNumberOfWords(string sentiment)
-        {
-            int numOfW = 1;
-            foreach(char c in sentiment)
-            {
-                if (c == ' ') numOfW++;
-            }
-            return numOfW;
-        }
     }
 }
