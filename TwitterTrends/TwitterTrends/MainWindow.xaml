@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -26,19 +27,6 @@
             <RowDefinition Height="639*"></RowDefinition>
             <RowDefinition Height="46*"/>
         </Grid.RowDefinitions>
-        <DockPanel x:Name="TopMainMenuDockPanel"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.ColumnSpan ="3">
-            <Menu DockPanel.Dock="Top" Height="20">
-                <MenuItem Header="File" Height="20">
-                    <MenuItem Header="Upload File" Command="{Binding OpenTweetsFile}"/>
-                    <MenuItem Header="Exit" Command="{Binding ExitProgramm}"/>
-                </MenuItem>
-                <MenuItem Header="About" Height="20">
-                </MenuItem>
-            </Menu>
-        </DockPanel>
         <Grid x:Name="LeftExtraMenu"
               Grid.Row="1"
               Width="35"
@@ -114,7 +102,13 @@
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookOpen"></materialDesign:PackIcon>
-                            <TextBlock Text="Choose file to open" Margin="15 0"></TextBlock>
+                            <TextBlock Text="Choose" Margin="15 0"></TextBlock>
+                            <ComboBox x:Name="ComboBoxChooseCountry" 
+                                      Margin="15 -3"
+                                      >
+                                <ComboBoxItem>Football</ComboBoxItem>
+                                <ComboBoxItem>Family</ComboBoxItem>
+                            </ComboBox>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem>
@@ -129,7 +123,7 @@
                             <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem PreviewMouseLeftButtonUp ="listViewItemClose_Click">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CloseBold"></materialDesign:PackIcon>
                             <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
@@ -145,42 +139,9 @@
               Grid.ColumnSpan="2"
               HorizontalAlignment="Center"
               >
-            <DockPanel x:Name="BottomDockPanel">
-                <Button 
-                    x:Name="TimeButton"
-                    Width="100"
-                    DockPanel.Dock="Left"
-                    Margin="50,5"
-                    Content="All day"
-                    >
-                </Button>
-                <DockPanel x:Name="BottomTimeDockPanel"
-                           VerticalAlignment="Center"
-                           >
-                    <TextBlock 
-                       x:Name="EarliestTimeTextBlock"
-                       Text= "00:00"
-                       Width="32"
-                       VerticalAlignment="Center"
-                       Margin="15"
-                />
-                    <Slider x:Name="TimeSlider"
-                        DockPanel.Dock="Left"
-                        Width="600"
-                        Height="20"
-                        VerticalAlignment="Center"
-                />
-                    <TextBlock x:Name="LatestTimeTextBlock"
-                            Text="xx:xx"
-                            DockPanel.Dock="Right"
-                            Margin="15"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                                >
-                    </TextBlock>
-                </DockPanel>
-            </DockPanel>
+            <TextBlock x:Name="BottomCensureText" 
+                       Text="Project was created by 4 glorious guys: Me and 3 friends of mine ." 
+                       FontSize="20"/>
         </Grid>
         <Grid x:Name="CenterMapPlaceGrid"
               Grid.Row="1"
@@ -195,13 +156,20 @@
               Grid.Column="2"
               >
             <DockPanel VerticalAlignment="Top">
-                <Image Height="200"
+                <Image x:Name="RightLogoImage"
+                       gif:ImageBehavior.AnimatedSource="Data/Pictures/twittergif.gif"
+                       gif:ImageBehavior.RepeatBehavior="6"
+                       Height="auto"
                        DockPanel.Dock="Top">
 
                 </Image>
                 <TextBlock Text="Statistics:"
-                           HorizontalAlignment="Center">
+                           HorizontalAlignment="Center"
+                           DockPanel.Dock="Top">
                 </TextBlock>
+                <ListView>
+                    
+                </ListView>
             </DockPanel>
         </Grid>
     </Grid>
