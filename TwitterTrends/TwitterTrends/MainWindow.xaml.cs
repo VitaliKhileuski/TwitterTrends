@@ -43,7 +43,7 @@ namespace TwitterTrends
             //загрузка вьюмодел для кнопок меню
             MainWindowViewModel viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
-            Database.GetInstance().SetPathTweetFile(@"..\..\..\Data\Tweets\football_tweets2014.txt");
+       
             
         }
 
@@ -74,6 +74,31 @@ namespace TwitterTrends
             Country country;
             country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
 
+            //foreach (var state in Database.GetInstance().Country.States)
+            //{
+            //    foreach (var polygon in state.Polygons)
+            //    {
+            //        List<PointLatLng> pointlatlang = new List<PointLatLng>();
+            //        GMapPolygon pol = new GMapPolygon(pointlatlang);
+            //        foreach (var point in polygon.Points)
+            //        {
+            //            pointlatlang.Add(new PointLatLng(point.X, point.Y));
+            //        }
+            //        pol.Points = pointlatlang;
+            //        gmap.RegenerateShape(pol);
+            //        (pol.Shape as Path).Fill = GetColorByMood(state);
+            //        (pol.Shape as Path).Stroke = Brushes.Blue;
+            //        (pol.Shape as Path).StrokeThickness = 1.5;
+            //        (pol.Shape as Path).Effect = null;
+            //        gmap.Markers.Add(pol);
+            //    }
+
+            //}
+
+        }
+        private void DrawStates()
+        {
+            gmap.Markers.Clear();
             foreach (var state in Database.GetInstance().Country.States)
             {
                 foreach (var polygon in state.Polygons)
@@ -94,7 +119,6 @@ namespace TwitterTrends
                 }
 
             }
-
         }
         private void listViewItemClose_Click(object sender, RoutedEventArgs e)
         {
@@ -121,6 +145,64 @@ namespace TwitterTrends
                 }
             }
             return Brushes.Gray;
+        }
+
+        private void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
+        {
+            string path = null;
+            ComboBoxItem selectedItem = (ComboBoxItem)ComboBoxChooseCountry.SelectedItem;
+            string response= selectedItem.Content.ToString();
+            switch (response) 
+            {
+
+                case "Cali":
+                    {
+                        path = @"..\..\..\Data\Tweets\cali_tweets2014.txt";
+                        break;
+                    }
+                case "Family":
+                    {
+                        path = @"..\..\..\Data\Tweets\family_tweets2014.txt";
+                        break;
+                    }
+                case "Football":
+                    {
+                        path = @"..\..\..\Data\Tweets\cali_tweets2014.txt";
+                        break;
+                    }
+                case "School":
+                    {
+                        path = @"..\..\..\Data\Tweets\high_school_tweets2014.txt";
+                        break;
+                    }
+                case "Movie":
+                    {
+                        path = @"..\..\..\Data\Tweets\movie_tweets2014.txt";
+                        break;
+                    }
+                case "Shopping":
+                    {
+                        path = @"..\..\..\Data\Tweets\shopping_tweets2014.txt";
+                        break;
+                    }
+                case "Snow":
+                    {
+                        path = @"..\..\..\Data\Tweets\snow_tweets2014.txt";
+                        break;
+                    }
+                case "Texas":
+                    {
+                        path = @"..\..\..\Data\Tweets\texas_tweets2014.txt";
+                        break;
+                    }
+                case "Weekend":
+                    {
+                        path = @"..\..\..\Data\Tweets\weekend_tweets2014.txt";
+                        break;
+                    }
+            }
+            Database.GetInstance().SetPathTweetFile(path);
+            DrawStates();
         }
     }
 }

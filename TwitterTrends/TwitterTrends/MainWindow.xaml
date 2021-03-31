@@ -104,10 +104,19 @@
                             <materialDesign:PackIcon Kind="BookOpen"></materialDesign:PackIcon>
                             <TextBlock Text="Choose" Margin="15 0"></TextBlock>
                             <ComboBox x:Name="ComboBoxChooseCountry" 
+                                      SelectionChanged="ComboBox_Selected"
                                       Margin="15 -3"
                                       >
-                                <ComboBoxItem>Football</ComboBoxItem>
+                                <ComboBoxItem>Cali</ComboBoxItem>
                                 <ComboBoxItem>Family</ComboBoxItem>
+                                <ComboBoxItem>Football</ComboBoxItem>
+                                <ComboBoxItem>School</ComboBoxItem>
+                                <ComboBoxItem>Movie</ComboBoxItem>
+                                <ComboBoxItem>Shopping</ComboBoxItem>
+                                <ComboBoxItem>Snow</ComboBoxItem>
+                                <ComboBoxItem>Texas</ComboBoxItem>
+                                <ComboBoxItem>Weekend</ComboBoxItem>
+                                
                             </ComboBox>
                         </StackPanel>
                     </ListViewItem>
