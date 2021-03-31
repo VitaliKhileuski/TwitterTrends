@@ -95,36 +95,10 @@ namespace TwitterTrends
 
             }
 
-
-
-            //          List<PointLatLng> pointlatlang= new List<PointLatLng>()
-            //          {
-
-            //new PointLatLng( 39.804456,-75.414089),
-            //          new PointLatLng(39.683964,-75.507197),
-            //           new PointLatLng(39.61824,-75.611259),
-            //            new PointLatLng(39.459409,-75.589352),
-            //             new PointLatLng(39.311532,-75.441474),
-            //               new PointLatLng(39.065069,-75.403136),
-            //          new PointLatLng(38.807653,-75.189535),
-            //           new PointLatLng(38.796699,-75.09095),
-            //            new PointLatLng(38.451652,-75.047134),
-            //             new PointLatLng(38.462606,-75.693413),
-            //               new PointLatLng(39.722302,-75.786521),
-            //          new PointLatLng(39.831841,-75.616736),
-            //             new PointLatLng(39.804456,-75.414089)
-            //      };
-
-            //          GMapPolygon polygon = new GMapPolygon(pointlatlang);
-            //          gmap.RegenerateShape(polygon);
-            //          (polygon.Shape as Path).Fill = Brushes.Red;
-            //         (polygon.Shape as Path).Stroke =Brushes.Blue;
-            //          (polygon.Shape as Path).StrokeThickness = 1.5;
-            //          (polygon.Shape as Path).Effect = null;
-            //          gmap.Markers.Add(polygon);
-
-           
-
+        }
+        private void listViewItemClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private SolidColorBrush GetColorByMood(State currentState)
