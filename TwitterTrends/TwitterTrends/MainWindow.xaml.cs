@@ -22,6 +22,7 @@ using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
+using WpfAnimatedGif;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace TwitterTrends
@@ -200,9 +201,16 @@ namespace TwitterTrends
                         break;
                     }
             }
+
+            var controller = ImageBehavior.GetAnimationController(RightLogoImage);
+            controller.Play();
+
             Database.GetInstance().SetPathTweetFile(path);
             await Task.Run(Database.GetInstance().StartNewState);
-            DrawStates(); 
+            DrawStates();
+
+            controller.Pause();
+            controller.GotoFrame(0);
         }
     }
 }
