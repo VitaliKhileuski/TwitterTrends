@@ -18,7 +18,6 @@ namespace TwitterTrends.Services.Parsers
             string temp = string.Empty;
             string jsonString = File.ReadAllText(path);
 
-           
             jsonString = DeleteAnotherBrackets(DeleteUselessBrackets(jsonString));
 
             for (int i = 0; i < jsonString.Length; i++)
@@ -35,17 +34,13 @@ namespace TwitterTrends.Services.Parsers
                 }
                 if ((jsonString[i] == '[' && jsonString[i + 1] == '[' && jsonString[i + 2] == '[') || flag==true)
                 {
-                    
-                    
                     if (jsonString[i]!= ']')
                     {
                         flag = true;
                         temp += jsonString[i];
-
                     }
                     else
                     {
-                        
                         temp += jsonString[i];
                         polygon.Points.Add(TweetParser.СoordinatesParse(temp));
                         temp = string.Empty;
@@ -53,24 +48,18 @@ namespace TwitterTrends.Services.Parsers
                         {
                             state.Polygons.Add(new Polygon(polygon));
                             polygon.Points.Clear();
-                            
-                            
                         }
                         if (jsonString[i + 2] == ']')
                         {
-
                             states.Add(new State(state));
                             state.Polygons.Clear();
                             flag = false;
                         }
                     }
-
                 }
             }
-
             return new Country(states);
         }
-
 
         private static string DeleteUselessBrackets(string jsonstring)
         {
@@ -83,10 +72,10 @@ namespace TwitterTrends.Services.Parsers
                    jsonstring=jsonstring.Remove(i, 1);
                     temp++;
                 }
-
             }
             return jsonstring;
         }
+
         private static string DeleteAnotherBrackets(string jsonstring)
         {
             int temp = 0;
@@ -102,23 +91,15 @@ namespace TwitterTrends.Services.Parsers
                     jsonstring = jsonstring.Remove(i, 1);
                     temp++;
                 }
-
             }
-
-
-
-
-
             return jsonstring;
         }
-
 
         private static bool IsInside(Polygon polygon,Tweet tweet)
         {
             bool flag = false;
             for (int i = 0, j = polygon.Points.Count - 1; i < polygon.Points.Count; j = i++)
             {
-
                 if ((((polygon.Points[i].Y <= tweet.PointOnMap.Y) && (tweet.PointOnMap.Y < polygon.Points[j].Y)) || ((polygon.Points[j].Y <= tweet.PointOnMap.Y)
                     && (tweet.PointOnMap.Y < polygon.Points[i].Y))) &&
                     (((polygon.Points[j].Y - polygon.Points[i].Y) != 0) &&
@@ -130,6 +111,7 @@ namespace TwitterTrends.Services.Parsers
             }
             return flag;
         }
+
         public static Country GroupTweetsByStates(List<Tweet>tweets,string path)
         {
             Country country = Parse(path);
@@ -152,30 +134,15 @@ namespace TwitterTrends.Services.Parsers
                     foreach(var polygon in state.Polygons)
                     {
                         if (IsInside(polygon, tweet)) 
-                        { state.TotalWeight += tweet.MoodWeight; state.isMoodDefined = true; }
-                        else
-                        {
-                            continue;
+                        { 
+                            state.TotalWeight += tweet.MoodWeight;
+                            if (state.isMoodDefined == false) state.isMoodDefined = true;
                         }
+                        else continue;
                     }
                 }
             }
-            //EstimateStatesMood(country);
             return country;
-        }
-
-        private static void EstimateStatesMood(Country country)
-        {
-            
-            foreach(var state in country.States)
-            {
-               
-                foreach(var tweet in state.Tweets)
-                {
-                    state.TotalWeight += tweet.MoodWeight;
-                }
-                state.TotalWeight = state.TotalWeight / state.Tweets.Count;
-            }
         }
     }
 }
