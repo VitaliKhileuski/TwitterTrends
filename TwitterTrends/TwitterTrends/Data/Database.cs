@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
@@ -14,7 +15,8 @@ namespace TwitterTrends.Data
         private List<Tweet> tweets;
         private Dictionary<char, List<Sentiment>> sentiments;
         private Country country;
-        
+        public string Path {private get; set; }
+
         public List<Tweet> Tweets
         {
             get 
@@ -46,17 +48,15 @@ namespace TwitterTrends.Data
             }
             return Instance;
         }
-        public void SetPathTweetFile(string filePath)
+        public void SetPathTweetFile(string path)
         {
-            if (Instance != null)
-            {
-                tweets = TweetParser.Parse(filePath);
-                country = StatesParser.GroupTweetsByStates(tweets, @"..\..\..\Data\States\states.json");
-            }
-            else
-            {
-                throw new NullReferenceException();
-            }
+            GetInstance().Path = path;
         }
+        public async Task StartNewState()
+        {
+            tweets = TweetParser.Parse(Path);
+            country = StatesParser.GroupTweetsByStates(tweets, @"..\..\..\Data\States\states.json");
+        }
+
     }
 }

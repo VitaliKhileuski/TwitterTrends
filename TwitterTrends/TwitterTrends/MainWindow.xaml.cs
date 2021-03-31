@@ -117,7 +117,6 @@ namespace TwitterTrends
                     (pol.Shape as Path).Effect = null;
                     gmap.Markers.Add(pol);
                 }
-
             }
         }
         private void listViewItemClose_Click(object sender, RoutedEventArgs e)
@@ -147,7 +146,7 @@ namespace TwitterTrends
             return Brushes.Gray;
         }
 
-        private void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
+        private async void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
         {
             string path = null;
             ComboBoxItem selectedItem = (ComboBoxItem)ComboBoxChooseCountry.SelectedItem;
@@ -202,7 +201,8 @@ namespace TwitterTrends
                     }
             }
             Database.GetInstance().SetPathTweetFile(path);
-            DrawStates();
+            await Task.Run(Database.GetInstance().StartNewState);
+            DrawStates(); 
         }
     }
 }

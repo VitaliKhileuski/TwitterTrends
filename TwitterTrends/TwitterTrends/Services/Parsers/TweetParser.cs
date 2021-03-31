@@ -245,6 +245,7 @@ namespace TwitterTrends.Models.Parsers
             }
             return weight;
         }
+
     }
 }
 
