@@ -118,7 +118,9 @@ namespace TwitterTrends
                     (pol.Shape as Path).Effect = null;
                     gmap.Markers.Add(pol);
                 }
+
                 DrawMarkers(state);
+
             }
             
         }
@@ -184,7 +186,9 @@ namespace TwitterTrends
                 gmap.Markers.Add(marker);
             }
         }
-        private void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
+
+        private async void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
+
         {
             string path = null;
             ComboBoxItem selectedItem = (ComboBoxItem)ComboBoxChooseCountry.SelectedItem;
@@ -240,8 +244,13 @@ namespace TwitterTrends
             }
 
             Database.GetInstance().SetPathTweetFile(path);
+
+            //DrawStates();
+
+            await Task.Run(Database.GetInstance().StartNewState);
             country = Database.GetInstance().Country;
-            DrawStates();
+            DrawStates(); 
+
         }
 
         private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
