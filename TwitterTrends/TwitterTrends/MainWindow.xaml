@@ -148,9 +148,10 @@
               Grid.ColumnSpan="2"
               HorizontalAlignment="Center"
               >
-            <TextBlock x:Name="BottomCensureText" 
-                       Text="Project was created by 4 glorious guys: Me and 3 friends of mine ." 
-                       FontSize="20"/>
+            <ProgressBar x:Name="LoadingProgressBar"
+                         Width="800"
+                         Height="30"
+                         Margin="10"/>
         </Grid>
         <Grid x:Name="CenterMapPlaceGrid"
               Grid.Row="1"
@@ -167,7 +168,8 @@
             <DockPanel VerticalAlignment="Top">
                 <Image x:Name="RightLogoImage"
                        gif:ImageBehavior.AnimatedSource="Data/Pictures/twittergif.gif"
-                       gif:ImageBehavior.RepeatBehavior="6"
+                       gif:ImageBehavior.AutoStart="False"
+                       
                        Height="auto"
                        DockPanel.Dock="Top">
 
