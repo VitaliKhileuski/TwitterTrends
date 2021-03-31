@@ -23,6 +23,7 @@ using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
 using Brushes = System.Windows.Media.Brushes;
+using Point = TwitterTrends.Models.Point;
 
 namespace TwitterTrends
 {
@@ -41,12 +42,12 @@ namespace TwitterTrends
 
             //data
             //загрузка вьюмодел для кнопок меню
-            MainWindowViewModel viewModel = new MainWindowViewModel();
-            this.DataContext = viewModel;
-       
-            
-        }
+            //MainWindowViewModel viewModel = new MainWindowViewModel();
+            //this.DataContext = viewModel;
 
+
+        }
+        Country country;
         private void Loaded_gmap(object sender, RoutedEventArgs e)
         {
             gmap.Bearing = 0;
@@ -54,7 +55,7 @@ namespace TwitterTrends
             gmap.DragButton = MouseButton.Left;
 
 
-            gmap.MaxZoom = 18;
+            gmap.MaxZoom =5;
             gmap.MinZoom = 3;
 
             gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
@@ -71,8 +72,8 @@ namespace TwitterTrends
             GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
 
-            Country country;
-            country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
+            //Country country;
+            //country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
 
             //foreach (var state in Database.GetInstance().Country.States)
             //{
@@ -117,8 +118,9 @@ namespace TwitterTrends
                     (pol.Shape as Path).Effect = null;
                     gmap.Markers.Add(pol);
                 }
-
+                DrawMarkers(state);
             }
+            
         }
         private void listViewItemClose_Click(object sender, RoutedEventArgs e)
         {
@@ -146,7 +148,42 @@ namespace TwitterTrends
             }
             return Brushes.Gray;
         }
+        private SolidColorBrush GetColorByTweet(Tweet tweet)
+        {
+            double temp = tweet.MoodWeight;
 
+            if (temp == 0) { return Brushes.White; }
+            else if (temp > 0)
+            {
+                if (temp <= 0.5) { return Brushes.LightBlue; }
+                else if (temp <= 0.75) { return Brushes.Blue; }
+                else { return Brushes.DarkBlue; }
+            }
+            else
+            {
+                if (temp >= -0.5) { return Brushes.Yellow; }
+                else if (temp >= -0.75) { return Brushes.Orange; }
+                else { return Brushes.Red; }
+            }
+            
+          
+        }
+        private void DrawMarkers(State state)
+        {
+            //   List<Tweet> tweets = TweetParser.Parse(path);
+            List<Tweet> tweets = state.Tweets;
+            foreach (var tweet in tweets)
+            {
+                GMapMarker marker = new GMapMarker(new PointLatLng(tweet.PointOnMap.X,tweet.PointOnMap.Y));
+                marker.Shape = new Ellipse
+                {
+                    Width = 5,
+                    Height = 5,
+                    Fill = GetColorByTweet(tweet),
+                };
+                gmap.Markers.Add(marker);
+            }
+        }
         private void ComboBox_Selected(object sender, SelectionChangedEventArgs e)
         {
             string path = null;
@@ -201,8 +238,49 @@ namespace TwitterTrends
                         break;
                     }
             }
+
             Database.GetInstance().SetPathTweetFile(path);
+            country = Database.GetInstance().Country;
             DrawStates();
+        }
+
+        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           
+            PointLatLng clickpoint = new PointLatLng();
+            clickpoint = gmap.FromLocalToLatLng((int)Mouse.GetPosition(this).X,(int)Mouse.GetPosition(this).Y);
+            Point point = new Point(clickpoint.Lat,clickpoint.Lng);
+            Tweet tweet = new Tweet();
+            tweet.PointOnMap = point;
+
+
+             foreach (var state in country.States)
+                {
+                    foreach (var polygon in state.Polygons)
+                    {
+                        if (StatesParser.IsInside(polygon, tweet))
+                        {
+                        if (state.Tweets.Count == 0)
+                        {
+                            mostNegativeBlock.Text = "NaN";
+                            mostPositiveBlock.Text = "NaN";
+                            indexBlock.Text = state.Name.ToString();
+
+                        }
+                        else
+                        {
+                            indexBlock.Text = state.Name.ToString();
+                            mostNegativeBlock.Text = state.Tweets.Min(u => u.MoodWeight).ToString();
+                            mostPositiveBlock.Text = state.Tweets.Max(u => u.MoodWeight).ToString();
+                        }
+
+                        }
+
+                    }
+
+                }
+            
+            
         }
     }
 }

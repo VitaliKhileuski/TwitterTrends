@@ -116,7 +116,7 @@
                                 <ComboBoxItem>Snow</ComboBoxItem>
                                 <ComboBoxItem>Texas</ComboBoxItem>
                                 <ComboBoxItem>Weekend</ComboBoxItem>
-                                
+
                             </ComboBox>
                         </StackPanel>
                     </ListViewItem>
@@ -157,7 +157,7 @@
               Grid.Column="0"
               Grid.ColumnSpan="2"
               >
-            <gmaps:GMapControl x:Name="gmap" Loaded="Loaded_gmap"/>
+            <gmaps:GMapControl MouseDoubleClick="MouseDoubleClick" x:Name="gmap" Loaded="Loaded_gmap"/>
         </Grid>
         <Grid x:Name="RightStatisticsInfoGrid"
               Grid.Row="1"
@@ -172,14 +172,55 @@
                        DockPanel.Dock="Top">
 
                 </Image>
+
                 <TextBlock Text="Statistics:"
                            HorizontalAlignment="Center"
                            DockPanel.Dock="Top">
                 </TextBlock>
+                <Grid DockPanel.Dock="Top">
+
+                </Grid>
                 <ListView>
-                    
+
                 </ListView>
             </DockPanel>
+            <ScrollViewer VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <Grid Margin="0,226,0,0">
+
+                    <Label Content="State index:" HorizontalAlignment="Left"
+                       Margin="10,30,0,0" 
+                       VerticalAlignment="Top"/>
+                    <Label Content="Value of the most negative tweet:"
+                       Margin="10,66,23,0"
+                   VerticalAlignment="Top"/>
+                    <Label Content="Value of the most positive tweet:" 
+HorizontalAlignment="Left" 
+                       Margin="10,103,0,0" 
+                       VerticalAlignment="Top"/>
+                    <TextBlock 
+                        x:Name="indexBlock"
+                        HorizontalAlignment="Left"
+                               Margin="91,34,0,0"
+                               TextWrapping="Wrap" 
+                               VerticalAlignment="Top"
+                               Width="auto"/>
+                    <TextBlock
+                        x:Name="mostNegativeBlock"
+                        HorizontalAlignment="Left" 
+                               Margin="227,70,0,0" 
+                               TextWrapping="Wrap" 
+                               VerticalAlignment="Top" 
+                               Width="auto" Height="12"/>
+                    <TextBlock
+                        x:Name="mostPositiveBlock"
+                        HorizontalAlignment="Left" 
+                               Margin="212,106,0,0"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Top" 
+                               Width="auto" Height="16"/>
+
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

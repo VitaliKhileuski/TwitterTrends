@@ -95,7 +95,7 @@ namespace TwitterTrends.Services.Parsers
             return jsonstring;
         }
 
-        private static bool IsInside(Polygon polygon,Tweet tweet)
+        public static bool IsInside(Polygon polygon,Tweet tweet)
         {
             bool flag = false;
             for (int i = 0, j = polygon.Points.Count - 1; i < polygon.Points.Count; j = i++)
@@ -134,7 +134,8 @@ namespace TwitterTrends.Services.Parsers
                     foreach(var polygon in state.Polygons)
                     {
                         if (IsInside(polygon, tweet)) 
-                        { 
+                        {
+                            state.Tweets.Add(tweet);
                             state.TotalWeight += tweet.MoodWeight;
                             if (state.isMoodDefined == false) state.isMoodDefined = true;
                         }
