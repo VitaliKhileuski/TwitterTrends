@@ -22,6 +22,7 @@ using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
 using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
+using WpfAnimatedGif;
 using Brushes = System.Windows.Media.Brushes;
 using Point = TwitterTrends.Models.Point;
 
@@ -243,10 +244,16 @@ namespace TwitterTrends
                     }
             }
 
-           Database.GetInstance().SetPathTweetFile(path);
+            var controller = ImageBehavior.GetAnimationController(RightLogoImage);
+            controller.Play();
+
+            Database.GetInstance().SetPathTweetFile(path);
             await Task.Run(Database.GetInstance().StartNewState);
             country = Database.GetInstance().Country;
-            DrawStates(); 
+            DrawStates();
+
+            controller.Pause();
+            controller.GotoFrame(0);
 
         }
 
@@ -261,11 +268,11 @@ namespace TwitterTrends
 
 
              foreach (var state in country.States)
+             {
+                foreach (var polygon in state.Polygons)
                 {
-                    foreach (var polygon in state.Polygons)
+                    if (StatesParser.IsInside(polygon, tweet))
                     {
-                        if (StatesParser.IsInside(polygon, tweet))
-                        {
                         if (state.Tweets.Count == 0)
                         {
                             mostNegativeBlock.Text = "NaN";
@@ -280,12 +287,10 @@ namespace TwitterTrends
                             mostPositiveBlock.Text = state.Tweets.Max(u => u.MoodWeight).ToString();
                         }
 
-                        }
-
                     }
-
                 }
-            
+
+             }
             
         }
     }

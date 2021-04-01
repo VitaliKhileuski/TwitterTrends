@@ -178,50 +178,42 @@
                            HorizontalAlignment="Center"
                            DockPanel.Dock="Top">
                 </TextBlock>
-                <Grid DockPanel.Dock="Top">
-
-                </Grid>
-                <ListView>
-
-                </ListView>
-            </DockPanel>
-            <ScrollViewer VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                <Grid Margin="0,226,0,0">
-
-                    <Label Content="State index:" HorizontalAlignment="Left"
-                       Margin="10,30,0,0" 
-                       VerticalAlignment="Top"/>
-                    <Label Content="Value of the most negative tweet:"
-                       Margin="10,66,23,0"
-                   VerticalAlignment="Top"/>
-                    <Label Content="Value of the most positive tweet:" 
-HorizontalAlignment="Left" 
-                       Margin="10,103,0,0" 
-                       VerticalAlignment="Top"/>
-                    <TextBlock 
-                        x:Name="indexBlock"
-                        HorizontalAlignment="Left"
-                               Margin="91,34,0,0"
-                               TextWrapping="Wrap" 
-                               VerticalAlignment="Top"
-                               Width="auto"/>
-                    <TextBlock
-                        x:Name="mostNegativeBlock"
-                        HorizontalAlignment="Left" 
-                               Margin="227,70,0,0" 
-                               TextWrapping="Wrap" 
-                               VerticalAlignment="Top" 
-                               Width="auto" Height="12"/>
-                    <TextBlock
-                        x:Name="mostPositiveBlock"
-                        HorizontalAlignment="Left" 
-                               Margin="212,106,0,0"
+                <DockPanel x:Name="statisticsdockpanel" 
+                           HorizontalAlignment="Left"
+                           >
+                    <DockPanel x:Name="StatsStateIndex"
+                               DockPanel.Dock="Top">
+                        <Label Content="State index:" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"/>
+                        <TextBlock x:Name="indexBlock"
+                                   DockPanel.Dock="Right"
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Center"
+                                   Width="auto"/>
+                    </DockPanel>
+                    <DockPanel x:Name="StatsNegativeTweet"
+                               DockPanel.Dock="Top">
+                        <Label Content="Value of the most negative tweet:"
+                               VerticalAlignment="Top"/>
+                        <TextBlock x:Name="mostNegativeBlock"
+                                   DockPanel.Dock="Right"
+                                   TextWrapping="Wrap" 
+                                   VerticalAlignment="Center" 
+                                   Width="auto"/>
+                    </DockPanel>
+                    <DockPanel x:Name="StatsPositiveTweet"
+                               DockPanel.Dock="Top">
+                        <Label Content="Value of the most positive tweet:" 
+                               VerticalAlignment="Top"/>
+                        <TextBlock x:Name="mostPositiveBlock"
+                               HorizontalAlignment="Left" 
                                TextWrapping="Wrap"
-                               VerticalAlignment="Top" 
-                               Width="auto" Height="16"/>
-
-                </Grid>
-            </ScrollViewer>
+                               VerticalAlignment="Center" 
+                               Width="auto"/>
+                    </DockPanel>
+                </DockPanel>
+            </DockPanel>
         </Grid>
     </Grid>
 </Window>
