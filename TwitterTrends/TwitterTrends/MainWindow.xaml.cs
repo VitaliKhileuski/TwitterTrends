@@ -4,6 +4,8 @@ using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -25,6 +27,7 @@ using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
 using WpfAnimatedGif;
 using Brushes = System.Windows.Media.Brushes;
+using Path = System.Windows.Shapes.Path;
 using Point = TwitterTrends.Models.Point;
 
 namespace TwitterTrends
@@ -233,7 +236,6 @@ namespace TwitterTrends
 
             controller.Pause();
             controller.GotoFrame(0);
-
         }
 
         private void MouseDoubleClick(object sender, MouseButtonEventArgs e)

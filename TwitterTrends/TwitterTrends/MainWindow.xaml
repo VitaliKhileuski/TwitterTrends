@@ -122,35 +122,18 @@
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="UnidentifiedFlyingObject"></materialDesign:PackIcon>
-                            <TextBlock Text="Я - летающая тарелка" Margin="20 0"></TextBlock>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="PackageOpen"></materialDesign:PackIcon>
-                            <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
+                            <TextBlock Text="I am an UFO" Margin="20 0"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem PreviewMouseLeftButtonUp ="listViewItemClose_Click">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CloseBold"></materialDesign:PackIcon>
-                            <TextBlock Text="Open it now" Margin="20 0"></TextBlock>
+                            <TextBlock Text="Close Application" Margin="20 0"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem></ListViewItem>
                 </ListView>
             </DockPanel>
-        </Grid>
-        <Grid x:Name="BottomTimePanelGrid"
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              HorizontalAlignment="Center"
-              >
-            <ProgressBar x:Name="LoadingProgressBar"
-                         Width="800"
-                         Height="30"
-                         Margin="10"/>
         </Grid>
         <Grid x:Name="CenterMapPlaceGrid"
               Grid.Row="0"
@@ -168,10 +151,8 @@
                 <Image x:Name="RightLogoImage"
                        gif:ImageBehavior.AnimatedSource="Data/Pictures/twittergif.gif"
                        gif:ImageBehavior.AutoStart="False"
-                       
                        Height="auto"
                        DockPanel.Dock="Top">
-
                 </Image>
 
                 <TextBlock Text="Statistics:"
@@ -180,6 +161,7 @@
                 </TextBlock>
                 <DockPanel x:Name="statisticsdockpanel" 
                            HorizontalAlignment="Left"
+                           DockPanel.Dock="Top"
                            >
                     <DockPanel x:Name="StatsStateIndex"
                                DockPanel.Dock="Top">
@@ -213,7 +195,109 @@
                                Width="auto"/>
                     </DockPanel>
                 </DockPanel>
+                <DockPanel x:Name="ColorLegend"
+                           DockPanel.Dock="Top"
+                           Margin="0 50">
+                    <TextBlock Text="MoodLevel Scale"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Top"
+                               Height="auto"
+                               Margin="0 10"
+                               HorizontalAlignment="Center"/>
+                    <Border Background="DarkBlue"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Very happy"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="White"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="Blue"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Happy"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="White"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="LightBlue"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Feels good"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="White"
+                            CornerRadius="20"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Neutral"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="Yellow"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Not so happy"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="Orange"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Unhappy"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
+                    <Border Background="Red"
+                            CornerRadius="20"
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="Very happy"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
+                </DockPanel>
             </DockPanel>
+        </Grid>
+        <Grid x:Name="BottomTimePanelGrid"
+              Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="3"
+              HorizontalAlignment="Center"
+              >
+            <TextBlock x:Name="BottomRightsText"
+                       Text="The project was created by 4 glorious guys: Me and three friends of mine"
+                       FontSize="30"
+                       />
         </Grid>
     </Grid>
 </Window>
