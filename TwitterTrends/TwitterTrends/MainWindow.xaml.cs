@@ -56,7 +56,7 @@ namespace TwitterTrends
             gmap.DragButton = MouseButton.Left;
 
 
-            gmap.MaxZoom =5;
+            gmap.MaxZoom = 20;
             gmap.MinZoom = 3;
 
             gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
@@ -183,6 +183,9 @@ namespace TwitterTrends
                     Width = 5,
                     Height = 5,
                     Fill = GetColorByTweet(tweet),
+                    ToolTip = "Tweet : " + tweet.TweetMessage + "\n" +
+                              "Date : " + tweet.PublicationDate + "\n" +
+                              "MoodWeight : " + tweet.MoodWeight
                 };
                 gmap.Markers.Add(marker);
             }
