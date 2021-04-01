@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Pictures\MainIcon.ico" />
     <None Remove="Data\Pictures\twittergif.gif" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Data\Pictures\MainIcon.ico" />
     <Resource Include="Data\Pictures\twittergif.gif" />
   </ItemGroup>
 
