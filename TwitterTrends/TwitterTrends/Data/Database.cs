@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
+using TwitterTrends.Services.Extra;
 using TwitterTrends.Services.Parsers;
 
 namespace TwitterTrends.Data
@@ -55,7 +56,7 @@ namespace TwitterTrends.Data
         public async Task StartNewState()
         {
             tweets = TweetParser.Parse(Path);
-            country = StatesParser.GroupTweetsByStates(tweets, @"..\..\..\Data\States\states.json");
+            country = ExtraFuncs.GroupTweetsByStates(tweets, @"..\..\..\Data\States\states.json");
         }
 
     }

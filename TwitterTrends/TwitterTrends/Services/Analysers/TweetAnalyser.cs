@@ -33,9 +33,9 @@ namespace TwitterTrends.Services.Analysers
                             {
                                 sentimentsByFirstWord.Add(sentiment);
 
-                                if (Extra.ExtraFuncs.GetNumberOfWords(sentiment.Text) > maxNumberOfWordsInSentiment)
+                                if (ExtraFuncs.GetNumberOfWords(sentiment.Text) > maxNumberOfWordsInSentiment)
                                 {
-                                    maxNumberOfWordsInSentiment = Extra.ExtraFuncs.GetNumberOfWords(sentiment.Text);
+                                    maxNumberOfWordsInSentiment = ExtraFuncs.GetNumberOfWords(sentiment.Text);
                                 }
                             }
                         }
@@ -93,7 +93,7 @@ namespace TwitterTrends.Services.Analysers
             {
                 foreach (Sentiment s in sentiments)
                 {
-                    if (Extra.ExtraFuncs.GetNumberOfWords(s.Text) == num && part.ToLower().Trim() == s.Text)
+                    if (ExtraFuncs.GetNumberOfWords(s.Text) == num && part.ToLower().Trim() == s.Text)
                     {
                         return s.Value;
                     }

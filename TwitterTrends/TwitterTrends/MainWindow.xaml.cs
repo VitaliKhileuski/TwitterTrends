@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using TwitterTrends.Data;
 using TwitterTrends.Models;
 using TwitterTrends.Models.Parsers;
+using TwitterTrends.Services.Extra;
 using TwitterTrends.Services.Parsers;
 using TwitterTrends.ViewModels;
 using WpfAnimatedGif;
@@ -72,31 +73,6 @@ namespace TwitterTrends
 
             GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
             GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
-
-            //Country country;
-            //country = StatesParser.Parse(@"..\..\..\Data\States\states.json");
-
-            //foreach (var state in Database.GetInstance().Country.States)
-            //{
-            //    foreach (var polygon in state.Polygons)
-            //    {
-            //        List<PointLatLng> pointlatlang = new List<PointLatLng>();
-            //        GMapPolygon pol = new GMapPolygon(pointlatlang);
-            //        foreach (var point in polygon.Points)
-            //        {
-            //            pointlatlang.Add(new PointLatLng(point.X, point.Y));
-            //        }
-            //        pol.Points = pointlatlang;
-            //        gmap.RegenerateShape(pol);
-            //        (pol.Shape as Path).Fill = GetColorByMood(state);
-            //        (pol.Shape as Path).Stroke = Brushes.Blue;
-            //        (pol.Shape as Path).StrokeThickness = 1.5;
-            //        (pol.Shape as Path).Effect = null;
-            //        gmap.Markers.Add(pol);
-            //    }
-
-            //}
-
         }
         private void DrawStates()
         {
@@ -274,7 +250,7 @@ namespace TwitterTrends
              {
                 foreach (var polygon in state.Polygons)
                 {
-                    if (StatesParser.IsInside(polygon, tweet))
+                    if (ExtraFuncs.IsInside(polygon, tweet))
                     {
                         if (state.Tweets.Count == 0)
                         {
