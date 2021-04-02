@@ -131,7 +131,6 @@
                             <TextBlock Text="Close Application" Margin="20 0"></TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem></ListViewItem>
                 </ListView>
             </DockPanel>
         </Grid>
@@ -279,7 +278,7 @@
                             DockPanel.Dock="Top"
                             Height="30"
                             >
-                        <TextBlock Text="Very happy"
+                        <TextBlock Text="Hate content"
                                    TextWrapping="Wrap"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
@@ -296,7 +295,8 @@
               >
             <TextBlock x:Name="BottomRightsText"
                        Text="The project was created by 4 glorious guys: Me and three friends of mine"
-                       FontSize="30"
+                       FontSize="23"
+                       VerticalAlignment="Center"
                        />
         </Grid>
     </Grid>
