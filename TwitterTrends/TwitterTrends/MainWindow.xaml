@@ -238,6 +238,20 @@
                                    VerticalAlignment="Center"
                                    ></TextBlock>
                     </Border>
+                    <Border Background="Gray"
+                            CornerRadius="20"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            
+                            DockPanel.Dock="Top"
+                            Height="30"
+                            >
+                        <TextBlock Text="No Info"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   ></TextBlock>
+                    </Border>
                     <Border Background="White"
                             CornerRadius="20"
                             BorderBrush="Black"
@@ -295,7 +309,7 @@
               >
             <TextBlock x:Name="BottomRightsText"
                        Text="The project was created by 4 glorious guys: Me and three friends of mine"
-                       FontSize="23"
+                       FontSize="21"
                        VerticalAlignment="Center"
                        />
         </Grid>
